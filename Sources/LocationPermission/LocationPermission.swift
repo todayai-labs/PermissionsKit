@@ -101,7 +101,7 @@ public class LocationPermission: Permission {
         return false
     }
     
-    public override func request(completion: @escaping () -> Void) {
+    public override func request(completion: @escaping @Sendable () -> Void) {
         switch _kind {
         case .location(let access):
             switch access {

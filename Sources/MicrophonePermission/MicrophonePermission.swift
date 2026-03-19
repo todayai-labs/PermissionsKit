@@ -58,7 +58,7 @@ public class MicrophonePermission: Permission {
         #endif
     }
     
-    public override func request(completion: @escaping () -> Void) {
+    public override func request(completion: @escaping @Sendable () -> Void) {
         #if os(iOS)
         AVAudioSession.sharedInstance().requestRecordPermission {
             granted in

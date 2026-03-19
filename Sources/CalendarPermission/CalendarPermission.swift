@@ -93,7 +93,7 @@ public class CalendarPermission: Permission {
         }
     }
     
-    public override func request(completion: @escaping () -> Void) {
+    public override func request(completion: @escaping @Sendable () -> Void) {
         
         let eventStore = EKEventStore()
         

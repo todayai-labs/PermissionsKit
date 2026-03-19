@@ -56,7 +56,7 @@ public class PhotoLibraryPermission: Permission {
         }
     }
     
-    public override func request(completion: @escaping () -> Void) {
+    public override func request(completion: @escaping @Sendable () -> Void) {
         PHPhotoLibrary.requestAuthorization({
             finished in
             DispatchQueue.main.async {

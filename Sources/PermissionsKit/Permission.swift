@@ -84,7 +84,7 @@ open class Permission {
         preconditionFailure("This method must be overridden.")
     }
     
-    open func request(completion: @escaping ()->Void) {
+    open func request(completion: @escaping @Sendable () -> Void) {
         preconditionFailure("This method must be overridden.")
     }
     
@@ -124,15 +124,8 @@ open class Permission {
         case calendar(access: CalendarAccess)
         case contacts
         case reminders
-        case speech
         case location(access: LocationAccess)
-        case motion
         case mediaLibrary
-        case bluetooth
-        case tracking
-        case faceID
-        case siri
-        case health
         
         public var name: String {
             switch self {
@@ -150,28 +143,14 @@ open class Permission {
                 return "Contacts"
             case .reminders:
                 return "Reminders"
-            case .speech:
-                return "Speech"
             case .location(access: .always):
                 return "Location Always"
             case .location(access: .whenInUse):
                 return "Location When Use"
-            case .motion:
-                return "Motion"
             case .mediaLibrary:
                 return "Media Library"
-            case .bluetooth:
-                return "Bluetooth"
             case .notification:
                 return "Notification"
-            case .tracking:
-                return "Tracking"
-            case .faceID:
-                return "FaceID"
-            case .siri:
-                return "Siri"
-            case .health:
-                return "Health"
             }
         }
     }

@@ -41,9 +41,11 @@ public class ContactsPermission: Permission {
     
     public override var status: Permission.Status {
         let authorizationStatus = CNContactStore.authorizationStatus(for: .contacts)
-        if #available(iOS 18.0, macOS 15.0, *), authorizationStatus == .limited {
+        #if os(iOS)
+        if #available(iOS 18.0, *), authorizationStatus == .limited {
             return .authorized
         }
+        #endif
         switch authorizationStatus {
         case .authorized: return .authorized
         case .denied: return .denied
@@ -53,7 +55,7 @@ public class ContactsPermission: Permission {
         }
     }
     
-    public override func request(completion: @escaping () -> Void) {
+    public override func request(completion: @escaping @Sendable () -> Void) {
         let store = CNContactStore()
         store.requestAccess(for: .contacts, completionHandler: { (granted, error) in
             DispatchQueue.main.async {

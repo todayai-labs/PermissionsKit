@@ -52,7 +52,7 @@ public class RemindersPermission: Permission {
         }
     }
     
-    public override func request(completion: @escaping () -> Void) {
+    public override func request(completion: @escaping @Sendable () -> Void) {
         
         let eventStore = EKEventStore()
         

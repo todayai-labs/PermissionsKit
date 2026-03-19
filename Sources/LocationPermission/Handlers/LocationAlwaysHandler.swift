@@ -81,7 +81,7 @@ class LocationAlwaysHandler: NSObject, CLLocationManagerDelegate {
     
     // MARK: - Init
     
-    static var shared: LocationAlwaysHandler?
+    nonisolated(unsafe) static var shared: LocationAlwaysHandler?
     
     override init() {
         super.init()

@@ -49,7 +49,7 @@ public class MediaLibraryPermission: Permission {
         }
     }
     
-    public override func request(completion: @escaping () -> Void) {
+    public override func request(completion: @escaping @Sendable () -> Void) {
         MPMediaLibrary.requestAuthorization() { status in
             DispatchQueue.main.async {
                 completion()

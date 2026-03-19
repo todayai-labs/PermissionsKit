@@ -82,7 +82,7 @@ class LocationWhenInUseHandler: NSObject, CLLocationManagerDelegate {
     
     // MARK: - Init
     
-    static var shared: LocationWhenInUseHandler?
+    nonisolated(unsafe) static var shared: LocationWhenInUseHandler?
     
     override init() {
         super.init()

@@ -24,7 +24,7 @@ import PermissionsKit
 #endif
 
 #if PERMISSIONSKIT_NOTIFICATION
-import UserNotifications
+@preconcurrency import UserNotifications
 
 public extension Permission {
     
@@ -67,7 +67,7 @@ public class NotificationPermission: Permission {
         return notificationSettings?.authorizationStatus
     }
     
-    public override func request(completion: @escaping () -> Void) {
+    public override func request(completion: @escaping @Sendable () -> Void) {
         let center = UNUserNotificationCenter.current()
         switch _kind {
         case .notification(let access):
