@@ -32,22 +32,26 @@ extension Permission.NotificationAccess {
                 .sound
         case .alert:
                 .alert
+        #if os(iOS)
         case .carPlay:
                 .carPlay
+        #endif
         case .criticalAlert:
                 .criticalAlert
         case .providesAppNotificationSettings:
                 .providesAppNotificationSettings
         case .provisional:
                 .provisional
+        #if os(iOS)
         case .announcement:
             if #available(iOS 13.0, watchOS 6.0, *) {
                 .announcement
             } else {
                 .alert
             }
+        #endif
         case .timeSensitive:
-            if #available(iOS 15.0, tvOS 15.0, watchOS 8.0, *) {
+            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
                 .timeSensitive
             } else {
                 .alert

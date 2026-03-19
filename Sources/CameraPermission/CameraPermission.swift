@@ -23,7 +23,7 @@
 import PermissionsKit
 #endif
 
-#if os(iOS) && PERMISSIONSKIT_CAMERA
+#if PERMISSIONSKIT_CAMERA
 import Foundation
 import AVFoundation
 

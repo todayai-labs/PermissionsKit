@@ -23,7 +23,7 @@
 import PermissionsKit
 #endif
 
-#if os(iOS) && PERMISSIONSKIT_REMINDERS
+#if PERMISSIONSKIT_REMINDERS
 import Foundation
 import EventKit
 
@@ -56,7 +56,7 @@ public class RemindersPermission: Permission {
         
         let eventStore = EKEventStore()
         
-        if #available(iOS 17.0, *) {
+        if #available(iOS 17.0, macOS 14.0, *) {
             eventStore.requestFullAccessToReminders { (accessGranted: Bool, error: Error?) in
                 DispatchQueue.main.async {
                     completion()

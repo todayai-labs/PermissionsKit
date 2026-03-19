@@ -23,9 +23,9 @@
 import PermissionsKit
 #endif
 
-#if os(iOS) && PERMISSIONSKIT_LOCATION
+#if PERMISSIONSKIT_LOCATION
 import Foundation
-import EventKit
+import CoreLocation
 
 public extension Permission {
     
@@ -62,7 +62,7 @@ public class LocationPermission: Permission {
     public override var status: Permission.Status {
         let authorizationStatus: CLAuthorizationStatus = {
             let locationManager = CLLocationManager()
-            if #available(iOS 14.0, tvOS 14.0, *) {
+            if #available(iOS 14.0, macOS 11.0, tvOS 14.0, *) {
                 return locationManager.authorizationStatus
             } else {
                 return CLLocationManager.authorizationStatus()
@@ -91,15 +91,13 @@ public class LocationPermission: Permission {
     }
     
     public var isPrecise: Bool {
-        #if os(iOS)
-        if #available(iOS 14.0, *) {
+        if #available(iOS 14.0, macOS 11.0, *) {
             switch CLLocationManager().accuracyAuthorization {
             case .fullAccuracy: return true
             case .reducedAccuracy: return false
             @unknown default: return false
             }
         }
-        #endif
         return false
     }
     

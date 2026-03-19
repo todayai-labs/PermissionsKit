@@ -23,7 +23,7 @@
 import PermissionsKit
 #endif
 
-#if os(iOS) && PERMISSIONSKIT_CALENDAR
+#if PERMISSIONSKIT_CALENDAR
 import Foundation
 import EventKit
 
@@ -46,7 +46,7 @@ public class CalendarPermission: Permission {
     
     open override var kind: Permission.Kind { self._kind }
     open var usageDescriptionKey: String? {
-        if #available(iOS 17, *) {
+        if #available(iOS 17, macOS 14, *) {
             switch kind {
             case .calendar(let access):
                 switch access {
@@ -74,7 +74,7 @@ public class CalendarPermission: Permission {
         case .notDetermined: return .notDetermined
         case .restricted: return .denied
         case .writeOnly:
-            if #available(iOS 17, *) {
+            if #available(iOS 17, macOS 14, *) {
                 switch kind {
                 case .calendar(let access):
                     switch access {
@@ -97,7 +97,7 @@ public class CalendarPermission: Permission {
         
         let eventStore = EKEventStore()
         
-        if #available(iOS 17.0, *) {
+        if #available(iOS 17.0, macOS 14.0, *) {
             
             let requestWriteOnly = {
                 eventStore.requestWriteOnlyAccessToEvents { (accessGranted: Bool, error: Error?) in

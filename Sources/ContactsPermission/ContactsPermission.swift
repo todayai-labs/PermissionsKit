@@ -23,7 +23,7 @@
 import PermissionsKit
 #endif
 
-#if os(iOS) && PERMISSIONSKIT_CONTACTS
+#if PERMISSIONSKIT_CONTACTS
 import Foundation
 import Contacts
 
@@ -41,7 +41,7 @@ public class ContactsPermission: Permission {
     
     public override var status: Permission.Status {
         let authorizationStatus = CNContactStore.authorizationStatus(for: .contacts)
-        if #available(iOS 18.0, *), authorizationStatus == .limited {
+        if #available(iOS 18.0, macOS 15.0, *), authorizationStatus == .limited {
             return .authorized
         }
         switch authorizationStatus {

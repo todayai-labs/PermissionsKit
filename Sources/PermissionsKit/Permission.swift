@@ -23,6 +23,8 @@ import Foundation
 
 #if os(iOS)
 import UIKit
+#elseif os(macOS)
+import AppKit
 #endif
 
 open class Permission {
@@ -59,6 +61,14 @@ open class Permission {
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
             if UIApplication.shared.canOpenURL(settingsUrl) {
                 UIApplication.shared.open(settingsUrl, completionHandler: nil)
+            }
+        }
+    }
+    #elseif os(macOS)
+    open func openSettingPage() {
+        DispatchQueue.main.async {
+            if let url = URL(string: "x-apple.systempreferences:") {
+                NSWorkspace.shared.open(url)
             }
         }
     }
@@ -183,14 +193,18 @@ open class Permission {
         case badge
         case sound
         case alert
+        #if os(iOS)
         case carPlay
+        #endif
         case criticalAlert
         case providesAppNotificationSettings
         case provisional
         
+        #if os(iOS)
         @available(iOS, introduced: 13.0, deprecated: 15.0, message: "Only from iOS 13.0 to 15.0")
         case announcement
-        @available(iOS, introduced: 15.0, deprecated: 15.0, message: "Only with iOS 15.0")
+        #endif
+        @available(iOS 15.0, macOS 12.0, *)
         case timeSensitive
     }
 }
